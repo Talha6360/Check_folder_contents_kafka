@@ -22,24 +22,22 @@ This project is a Kafka-based microservice system that helps validate files befo
 ---
 
 
-
 ## 🚀 How to Run This Project
 
 ### 1️⃣ Clone the Repository
 
-```bash
 git clone https://github.com/Talha6360/Check_folder_contents_kafka.git
 cd Check_folder_contents_kafka
 
 2️⃣ Start Kafka and Zookeeper via Docker
-bash
-Copy code
+
 docker-compose up -d
 This will start:
 
 Kafka Broker → localhost:9092
 
 Zookeeper → localhost:2181
+
 
 3️⃣ Open 3 Terminals and Run Services
 Make sure you run these commands from the project root directory (Check_folder_contents_kafka).
