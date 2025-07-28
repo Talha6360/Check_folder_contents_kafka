@@ -21,9 +21,7 @@ This project is a Kafka-based microservice system that helps validate files befo
 
 ---
 
-## 🚀 How to Run This Project
-
-### 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/Talha6360/Check_folder_contents_kafka.git
