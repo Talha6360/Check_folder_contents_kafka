@@ -1,0 +1,20 @@
+{
+  "deployment_id": "deploy_42ef",
+  "files": [
+    {
+      "file_path": "C:/Users/Mats/OneDrive/Desktop/DSA/kafka-docker-demo/data/serve/org1/ws2/collA/video1.mp4",
+      "allow_copy_fallback": true,
+      "servers": ["edge-1.domain.local", "edge-3.domain.local"]
+    },
+    {
+      "file_path": "C:/Users/Mats/OneDrive/Desktop/DSA/kafka-docker-demo/data/serve/org2/ws5/collB/video2.mp4",
+      "allow_copy_fallback": false,
+      "servers": ["edge-2.domain.local"]
+    },
+    {
+      "file_path": "C:/Users/Mats/OneDrive/Desktop/DSA/kafka-docker-demo/data/serve/org3/ws9/collZ/video3.mp4",
+      "allow_copy_fallback": true,
+      "servers": ["edge-1.domain.local"]
+    }
+  ]
+}
