@@ -21,6 +21,8 @@ This project is a Kafka-based microservice system that helps validate files befo
 
 ---
 
+
+
 ## 🚀 How to Run This Project
 
 ### 1️⃣ Clone the Repository
@@ -28,6 +30,7 @@ This project is a Kafka-based microservice system that helps validate files befo
 ```bash
 git clone https://github.com/Talha6360/Check_folder_contents_kafka.git
 cd Check_folder_contents_kafka
+
 2️⃣ Start Kafka and Zookeeper via Docker
 bash
 Copy code
@@ -45,26 +48,22 @@ Make sure you run these commands from the project root directory (Check_folder_c
 
 Sends a deployment request based on the JSON payload in data/payload.json.
 
-bash
-Copy code
 python scripts/produce.py
+
 🔵 Terminal 2 – Validator
 
 Validates if the files listed in the deployment payload exist.
 
-bash
-Copy code
 python scripts/validate_and_respond.py
+
 🟡 Terminal 3 – Monitor
 
 Listens for validation results and logs deployment status.
 
-bash
-Copy code
 python scripts/monitor.py
+
+
 📁 Project Structure
-bash
-Copy code
 Check_folder_contents_kafka/
 ├── data/
 │   ├── payload.json               # Deployment payload JSON
@@ -77,9 +76,10 @@ Check_folder_contents_kafka/
 │   └── monitor.py                # Monitor consumer script
 ├── docker-compose.yml            # Docker Compose to start Kafka & Zookeeper
 └── README.md                    # This project documentation
+
+
 📄 Example Payload (data/payload.json)
 json
-Copy code
 {
   "deployment_id": "deploy_42ef",
   "target": "serve",
@@ -91,11 +91,11 @@ Copy code
     "video2.mp4"
   ]
 }
+
+
 💡 Tips
 Place the required files inside:
 
-bash
-Copy code
 data/serve/org2/ws5/collB/
 If any file from the payload JSON is missing, the validator will send a FAIL response listing the missing files.
 
