@@ -1,62 +1,71 @@
 # 🗂️ Check Folder Contents with Kafka (Deployment Monitor)
 
-This project is a **Kafka-based file validation and deployment system** that watches for file deployment requests and ensures all expected files exist **before deployment proceeds**. It's useful in cases where files must be validated before pushing them into production systems (e.g., videos, configs, datasets, etc.).
+This project is a **Kafka-based microservice system** that helps **validate files before deployment**. It simulates a real-world scenario where files (e.g., videos, configs, datasets) must be verified before going live in production.
 
-> ✅ This project also monitors if **any files are missing**, and sends a validation response with the deployment status!
-
----
-
-## 📁 What We Did
-
-- Created a **Kafka-based microservice project** to:
-  - Accept a **JSON file payload** describing the files to deploy
-  - Automatically validate whether the files exist
-  - Respond back with a **PASS** or **FAIL** and the reason
-- Organized services into **producers**, **validators**, and **monitors**
-- Used **Docker** and **Docker Compose** to run Kafka and Zookeeper locally
-- Pushed this entire working project to GitHub 🚀
+✅ Automatically checks if all required files exist before deployment and returns a PASS/FAIL result via Kafka!
 
 ---
 
-## 🚀 How to Use This Project
-1️⃣ Clone the Repository
+## 📦 What This Project Does
 
+- Accepts a **JSON deployment payload** describing files to be deployed.
+- Checks if the specified files **exist in the correct folder structure**.
+- Responds back with deployment **status** using Kafka:
+  - ✅ `PASS` if all files are found.
+  - ❌ `FAIL` if any files are missing (with the missing files listed).
+- Uses **Apache Kafka (via Docker)** for communication between services.
+- Divides functionality into 3 Python microservices:
+  - **Producer**: Sends deployment request.
+  - **Validator**: Validates files and sends result.
+  - **Monitor**: Monitors validation responses.
+
+---
+
+## 🚀 How to Run This Project
+
+### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/Talha6360/Check_folder_contents_kafka.git
 cd Check_folder_contents_kafka
-
-Start Kafka and Zookeeper (via Docker)
+2️⃣ Start Kafka and Zookeeper via Docker
 bash
 Copy code
 docker-compose up -d
-This will start:
+This starts:
 
-Kafka broker (localhost:9092)
+Kafka Broker → localhost:9092
 
-Zookeeper (localhost:2181)
+Zookeeper → localhost:2181
 
-3️⃣ Open 3 Terminals and Run the Services
-Make sure you're inside the kafka-docker-demo folder
-
-✅ Terminal 1 – Run the Producer
+3️⃣ Open 3 Terminals and Run Services
+🟢 Terminal 1 – Producer
 bash
 Copy code
 python scripts/produce.py
-This sends a deployment request based on the JSON file inside data/payload.json.
-
-🛡️ Terminal 2 – Run the Validator
+🔵 Terminal 2 – Validator
 bash
 Copy code
 python scripts/validate_and_respond.py
-This validates if the files listed in the deployment payload actually exist.
-
-👀 Terminal 3 – Run the Monitor
+🟡 Terminal 3 – Monitor
 bash
 Copy code
 python scripts/monitor.py
-This listens for validation results and logs whether deployment is allowed or rejected.
-
-📝 Example Payload (data/payload.json)
+📁 Project Structure
+text
+Copy code
+Check_folder_contents_kafka/
+├── data/
+│   ├── payload.json              # Deployment payload
+│   └── serve/org2/ws5/collB/     # Target folder for files
+│       ├── video1.mp4
+│       └── video2.mp4
+├── scripts/
+│   ├── produce.py                # Kafka producer
+│   ├── validate_and_respond.py   # Validator consumer
+│   └── monitor.py                # Monitor consumer
+├── docker-compose.yml            # Kafka & Zookeeper services
+└── README.md                     # Project documentation
+📄 Example Payload (data/payload.json)
 json
 Copy code
 {
@@ -70,39 +79,37 @@ Copy code
     "video2.mp4"
   ]
 }
-You can edit this file to simulate different deployment requests.
-
-📌 Notes
-If any file is missing, the validator will send a FAILED response with the missing file(s) listed.
-
-You can add test video files inside the correct path:
+💡 Tips
+Place required files inside:
 data/serve/org2/ws5/collB/
 
-💻 Tech Stack
-Apache Kafka (via Docker)
+If a file from payload.json is missing, the validator sends a FAIL response listing missing files.
 
-Python 3 (producer, validator, monitor)
+🔧 Tech Stack
+🐍 Python 3 (Producer, Validator, Monitor)
 
-JSON for file payload
+🐘 Apache Kafka (via Docker)
 
-YAML (docker-compose.yml) for service orchestration
+📝 JSON (payload format)
 
-🔧 Future Enhancements (Optional Ideas)
-Add email or Slack notifications on validation result
+⚙️ YAML (docker-compose.yml)
 
-Store validation logs in a database
+🔮 Future Improvements
+Add notifications (Slack/Email) on validation.
 
-Web UI to upload payload JSON
+Persist logs to a database.
 
-📬 Author
+Build a web UI for uploads and results.
+
+👨‍💻 Author
 Mohammed Abdul Talha Shahri
-🔗 GitHub Profile
+🔗 GitHub
 
-🧠 Tip for Beginners
-Don't worry if Kafka or Docker is new to you — this project is a simple way to understand:
+🧠 For Beginners
+Learn:
 
-Kafka message queues
+Kafka fundamentals (topics, producers, consumers)
 
-Validating file presence before deployment
+Microservice patterns in Python
 
-Structuring microservices with Python
+Docker Compose orchestration
