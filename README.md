@@ -19,8 +19,7 @@ This project is a **Kafka-based file validation and deployment system** that wat
 ---
 
 ## 🚀 How to Use This Project
-
-### 1️⃣ Clone the Repository
+1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/Talha6360/Check_folder_contents_kafka.git
